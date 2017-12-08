@@ -230,8 +230,11 @@ CS = np.zeros(ms)
 CS_post = np.zeros(ms)
 for i in range(0,ms):
     def integrand(x):
-        return a[i]-b[i]*x
+        return a[i]-b[i]*x-p[i]
     CS[i], err = integrate.quad(integrand,0,Q[i])
+for i in range(0,ms):
+    def integrand(x):
+        return a[i]-b[i]*x-p_post[i]
     CS_post[i], err = integrate.quad(integrand,0,Q_post[i])
     
 harm = CS - CS_post
