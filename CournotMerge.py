@@ -1,12 +1,12 @@
 """
-Created on Thu Nov 30 09:52:54 2017
+Updated: 12/12/17
 
-@author: dcoyne
+@author: David Coyne
 
 ============================================================
 
 This code is a modified version of Dan Greenfield & Nathan Wilson's work.
-It generates predicted effects of a merge by leveraging the following
+It generates predicted effects of a merger/acquisition by leveraging the following
 assumptions:
 
 a. Cournot competition
@@ -24,25 +24,6 @@ import numpy as np
 from numpy.linalg import solve
 from IPython.display import display
 import scipy.integrate as integrate
-
-# Define a Cournot firm object class "cfirm"
-class cfirm:
-    def __init__(self, name="", q=[0], markets=[""]):
-        self.name = name
-        self.q = np.array(q)
-        self.mnames = markets
-    
-    def describe(self):
-        ds = "Production for %s \n===================================" % (self.name)
-        for q,name in zip(self.q, self.mnames):
-            ds = ds + "\n %.2f in %s" % (q, name)
-        return ds
-    
-    def merge(self, partner):
-        name = self.name + "/" + partner.name
-        q = np.array(self.q) + np.array(partner.q)
-        mf = firm(name,q,self.mnames)
-        return mf
 
 # Define a merger object class
 class cournotMerge:
@@ -323,3 +304,22 @@ class cournotMerge:
         for i in range(0,self.ms):
             ps = ps + "\nEstimated harm to consumers in %s: %.3f" % (self.markets[i], self.harm[i])
         return ps
+
+# Define a Cournot firm object class "cfirm"
+class cfirm:
+    def __init__(self, name="", q=[0], markets=[""]):
+        self.name = name
+        self.q = np.array(q)
+        self.mnames = markets
+    
+    def describe(self):
+        ds = "Production for %s \n===================================" % (self.name)
+        for q,name in zip(self.q, self.mnames):
+            ds = ds + "\n %.2f in %s" % (q, name)
+        return ds
+    
+    def merge(self, partner):
+        name = self.name + "/" + partner.name
+        q = np.array(self.q) + np.array(partner.q)
+        mf = firm(name,q,self.mnames)
+        return mf
