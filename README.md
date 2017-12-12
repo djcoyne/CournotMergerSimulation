@@ -71,7 +71,7 @@ CournotMerge.py - Contains the classes and functions required to run the merger 
           Displays the estimated harm to consumer surplus as a result of the merger by market
          
       
-    cfirm - These are firm objects that are passed into a CournotMerge object
+    firm - These are firm objects that are passed into a CournotMerge object
   
       Functions:
         __init__(self, name="", q=[0], markets=[""])
@@ -85,9 +85,9 @@ CournotMerge.py - Contains the classes and functions required to run the merger 
           Describes production for the firm by market
         
         merge(self, partner)
-          returns: cfirm object
+          returns: firm object
           
-          Merges self with partner by combining names and summing quantities by market
+          Creates a new firm by merging self with partner (combines names and sums production quantities by market)
          
          
 sample.py - Contains an imaginary merger of avocado retailers that compete in 3 geographic markets. Demonstrates how a user-made  script can use the CournotMerge program
