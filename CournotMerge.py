@@ -305,8 +305,8 @@ class cournotMerge:
             ps = ps + "\nEstimated harm to consumers in %s: %.3f" % (self.markets[i], self.harm[i])
         return ps
 
-# Define a Cournot firm object class "cfirm"
-class cfirm:
+# Define a Cournot firm object class "firm"
+class firm:
     def __init__(self, name="", q=[0], markets=[""]):
         self.name = name
         self.q = np.array(q)
