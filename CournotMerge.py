@@ -149,7 +149,7 @@ class cournotMerge:
 
         Q_change = 100*(Q_post-Q)/Q
         self.Q_change = Q_change
-        shares_post = df_post.iloc[:,1:]/Q
+        shares_post = df_post.iloc[:,1:]/Q_post
 
         # Calculate post-merger prices
         p_post = a - b*Q_post
