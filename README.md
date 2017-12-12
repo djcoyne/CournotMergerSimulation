@@ -4,7 +4,7 @@ A simulation program for Mergers in Cournot Markets
 This Python program simulates a merger in Cournot Markets. It allows for a user-defined number of competitors and distinct geographic markets. (Functionality for jointly-defined geographic and product markets will be added in a future update.)
 
 # Files included:
-CournotMerge.py - contains the class and functions required to run the merger simulation
+CournotMerge.py - contains the classes and functions required to run the merger simulation
   
   Classes:
     
@@ -75,4 +75,7 @@ CournotMerge.py - contains the class and functions required to run the merger si
           returns: cfirm object
           
           Merges self with partner by combining names and summing quantities by market
+         
+         
+sample.py - Contains an imaginary merger of avocado retailers that compete in 3 geographic markets. Demonstrates how a user-made  script can use the CournotMerge program
     
