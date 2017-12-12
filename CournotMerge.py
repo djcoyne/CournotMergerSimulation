@@ -61,8 +61,9 @@ class cournotMerge:
         # Solve for profits
         rev = np.matmul(np.matrix(p),df.iloc[:,1:].T)
         costs = (df.iloc[:,1:].sum(axis=1))**2/(2*k).T + (t*df.iloc[:,1:]).sum(axis=1)
-        self.prof = np.diag(rev - np.matrix(costs).T)
-    
+        prof = np.diag(rev - np.matrix(costs).T)
+        self.prof = prof
+        
         # Calculate market HHI values
         hhi = np.zeros(ms)
         for i in range(0,ms):
