@@ -4,7 +4,7 @@ A simulation program for Mergers in Cournot Markets
 This Python program simulates a merger in Cournot Markets. It allows for a user-defined number of competitors and distinct geographic markets. (Functionality for jointly-defined geographic and product markets will be added in a future update.)
 
 # Files included:
-CournotMerge.py - contains the classes and functions required to run the merger simulation
+CournotMerge.py - Contains the classes and functions required to run the merger simulation
   
   Classes:
     
