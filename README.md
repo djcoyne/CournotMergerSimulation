@@ -1,7 +1,20 @@
 # CournotMergerSimulation
 A simulation program for Mergers in Cournot Markets
 
-This Python program simulates a merger in Cournot Markets. It allows for a user-defined number of competitors and distinct geographic markets. (Functionality for jointly-defined geographic and product markets will be added in a future update.)
+This Python program simulates a merger of 2 firms in an imperfectly competitive industry. It generates predicted effects of a merger/acquisition by leveraging the following
+assumptions:
+
+a. Cournot competition between user-defined firms
+b. Linear demand, potentially in multiple geographic markets
+c. quadratic costs
+
+(Note: The program also currently assumes that production is at a single facility and that firms compete over one specific product market. Functionality for jointly-defined geographic and product markets, as well as support for multiple production facilities will be added in a future update.)
+
+Each merger simulation requires the following inputs:
+1. Matrix of production quantities/capacities at the firm level
+2. Market demand elasticity
+3. Pre-merger price
+4. Any merger-specific marginal cost efficiency
 
 # Files included:
 CournotMerge.py - Contains the classes and functions required to run the merger simulation
