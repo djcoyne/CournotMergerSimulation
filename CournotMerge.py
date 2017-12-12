@@ -132,11 +132,7 @@ class cournotMerge:
                     M[i*post_ns,j*post_ns] += (-E/100)/k_post[0] 
 
         # Solve the model
-        test = np.ones(post_ns*ms)
-        print(np.matmul(M,test))
-        print(V)
-        print(np.matmul(M,test)-V)
-        func = lambda x: np.linalg.norm(np.matmul(M,x)-V)
+        func = lambda x: np.linalg.norm(np.dot(M,x)-V)
         q_post = minimize(func, np.zeros(post_ns*ms), method='L-BFGS-B', bounds=[(0,None) for x in range(post_ns*ms)])['x']
 
         # Fill a dataframe with post-merger quantities
