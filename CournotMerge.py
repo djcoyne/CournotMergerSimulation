@@ -24,17 +24,20 @@ import numpy as np
 from numpy.linalg import solve
 from IPython.display import display
 import scipy.integrate as integrate
+from scipy.optimize import minimize
 
 # Define a merger object class
 class cournotMerge:
     def __init__(self, F={}, markets=[], e=[], p=[], MF = [0,1], E=0):
         # Reformat the input data for calculations
+        u = MF[0]
+        v = MF[1]
         self.markets=markets
         ns = len(F)
         self.ns=ns
         ms = len(markets)
         self.ms=ms
-        df = pd.DataFrame(columns =["Firm"]+F[1].mnames)
+        df = pd.DataFrame(columns =["Firm"]+F[u].mnames)
 
         i = 0
         for index,f in enumerate(F):
@@ -75,8 +78,8 @@ class cournotMerge:
         
         # Run the merger simulation
         post_F = {}
-        u = MF[0]
-        v = MF[1]
+        y = list(F.keys()).index(u)
+        z = list(F.keys()).index(v)
         self.mp = [F[u].name,F[v].name]
         post_F[1] = F[u].merge(F[v])
         NM = [x for i,x in enumerate(F) if x!=u and x!=v]
@@ -90,13 +93,13 @@ class cournotMerge:
         # Define k_post and t_post (weighted average transport cost)
         k_post = np.zeros(post_ns)
         t_post = np.zeros((post_ns,ms))
-
-        k_post[0] = k[u-1]+k[v-1]
-        t_post[0,:] = np.array(t[u-1]*F[u].q/post_F[1].q) + np.array(t[v-1]*F[v].q/post_F[1].q)
+        k_post[0] = k[y]+k[z]
+        t_post[0,:] = np.array(t[y]*F[u].q/post_F[1].q) + np.array(t[z]*F[v].q/post_F[1].q)
         for i in range(0,ns-2): 
             l = NM[i]
-            k_post[i+1] = k[l-1]
-            t_post[i+1] = t[l-1]
+            li = list(F.keys()).index(l)
+            k_post[i+1] = k[li]
+            t_post[i+1] = t[li]
     
         #Set up the system of equations by market
         M_part={}
@@ -117,7 +120,10 @@ class cournotMerge:
                 Mr = np.hstack((Mr,M_part[i*ms+j]))
             M = np.vstack((M,Mr))
         M = M[1:,1:]
-        V = np.vstack(np.hsplit(a-t_post,ms))
+        V = np.zeros(post_ns*ms)
+        Vpart = np.vstack(np.hsplit(a-t_post,ms))
+        for i in range(0,post_ns*ms):
+            V[i]=Vpart[i][0]
     
         # Account for efficiencies
         if E!=0:
@@ -126,7 +132,12 @@ class cournotMerge:
                     M[i*post_ns,j*post_ns] += (-E/100)/k_post[0] 
 
         # Solve the model
-        q_post = solve(M, V)
+        test = np.ones(post_ns*ms)
+        print(np.matmul(M,test))
+        print(V)
+        print(np.matmul(M,test)-V)
+        func = lambda x: np.linalg.norm(np.matmul(M,x)-V)
+        q_post = minimize(func, np.zeros(post_ns*ms), method='L-BFGS-B', bounds=[(0,None) for x in range(post_ns*ms)])['x']
 
         # Fill a dataframe with post-merger quantities
         df_post = pd.DataFrame(columns =["Firm"]+post_F[1].mnames)
@@ -135,7 +146,7 @@ class cournotMerge:
             postprod=[]
             for j in range(0,ms):
                 l = i+j*post_ns
-                postprod.append(q_post[l][0])
+                postprod.append(q_post[l])
             df_post.loc[i] = [post_F[f].name, *postprod]
             i+=1
         self.df_post = df_post
@@ -163,10 +174,11 @@ class cournotMerge:
         prof_post = np.diag(rev_post - np.matrix(costs_post).T)
         self.prof_post = prof_post
         prof_change = np.zeros(post_ns)
-        prof_change[0] = 100*(prof_post[0] - (prof[u-1]+prof[v-1]))/(prof[u-1]+prof[v-1]) 
+        prof_change[0] = 100*(prof_post[0] - (prof[y]+prof[z]))/(prof[y]+prof[z]) 
         for i in range(0,ns-2): 
             l = NM[i]
-            prof_change[i+1] = 100*(prof_post[i+1] - prof[l-1])/prof[l-1]
+            li = list(F.keys()).index(l)
+            prof_change[i+1] = 100*(prof_post[i+1] - prof[li])/prof[li]
         self.prof_change = prof_change
         
         # Calculate market HHI values
