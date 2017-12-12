@@ -200,10 +200,10 @@ class cournotMerge:
         ds = "This object simulates a merger between "+self.mp[0]+" and "+self.mp[1]+".\n"
         if self.ns>2:
             ds = ds + "\nAdditional competitors include:\n   "
-            for i in range(1,post_ns):
+            for i in range(1,self.post_ns):
                 ds = ds+"%s\n   " %(self.df_post.iloc[i,0])
-        ds = ds + "\nCompetitors compete in "+str(ms)+" markets:\n   "
-        for i in range(0,ms):
+        ds = ds + "\nCompetitors compete in "+str(self.ms)+" markets:\n   "
+        for i in range(0,self.ms):
             ds = ds+"%s\n   " %(self.markets[i])
         return ds
     
