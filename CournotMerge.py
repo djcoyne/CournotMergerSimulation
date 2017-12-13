@@ -229,10 +229,10 @@ class cournotMerge:
             print("Total production in %s: %.2f" % (self.markets[i],self.Q[i]))
         print("\n")
 
-        # Display pre-merger profits
+        # Display pre-merger variable profits
         print("Pre-merger Profits\n===================================")
         for i in range(0,self.ns):
-            print("Profits for %s: %.2f" %(self.df.iloc[i,0],self.prof[i]))
+            print("Variable profits for %s: %.2f" %(self.df.iloc[i,0],self.prof[i]))
         print("\n")    
 
         # Display pre-merger HHI values
@@ -254,10 +254,10 @@ class cournotMerge:
             print("Total production in %s: %.2f (a change of %.2f percent)" % (self.markets[i],self.Q_post[i],self.Q_change[i]))
         print("\n")
    
-        # Display post-merger profits
+        # Display post-merger variable profits
         print("Post-merger Profits\n===================================")
         for i in range(0,self.post_ns):
-            print("Profits for %s: %.2f (a change of %.2f percent)" %(self.df_post.iloc[i,0],self.prof_post[i],self.prof_change[i]))
+            print("Variable profits for %s: %.2f (a change of %.2f percent)" %(self.df_post.iloc[i,0],self.prof_post[i],self.prof_change[i]))
         print("\n")
    
         # Display post-merger HHI values
@@ -294,10 +294,10 @@ class cournotMerge:
         return ps
         
     def profits(self):
-        # Display post-merger profits
+        # Display post-merger variable profits
         ps = ""
         for i in range(0,self.post_ns):
-            ps = ps+"\nProfits for %s: %.2f (a change of %.2f percent)" %(self.df_post.iloc[i,0],self.prof_post[i],self.prof_change[i])
+            ps = ps+"\nVariable profits for %s: %.2f (a change of %.2f percent)" %(self.df_post.iloc[i,0],self.prof_post[i],self.prof_change[i])
         return ps
         
     def demand(self):
