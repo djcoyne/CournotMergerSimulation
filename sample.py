@@ -4,7 +4,7 @@ import CournotMerge as cm
 markets = ["San Diego", "Seattle", "DC"]
 
 # Define the market elasticities
-elasticity = [0.1, 0.6, 1.1]
+elasticity = [0.75, 1.6, 3.1]
 
 # Define the market prices
 price = [0.66, 1.20, 1.90]
