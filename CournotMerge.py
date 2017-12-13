@@ -132,9 +132,19 @@ class cournotMerge:
                     M[i*post_ns,j*post_ns] += (-E/100)/k_post[0] 
 
         # Solve the model
-        func = lambda x: np.linalg.norm(np.dot(M,x)-V)
-        q_post = minimize(func, np.zeros(post_ns*ms), method='L-BFGS-B', bounds=[(0,None) for x in range(post_ns*ms)])['x']
-
+        q_post = np.linalg.solve(M,V)
+        pos = np.where(q_post>=0)[0]
+        if len(pos) < len(V):
+            print("*WARNING*: Interior solution infeasible. Program will report a corner solution... User should check other corners\n\n")
+        
+        while len(pos) < len(V):
+            Mp = M[pos][:,pos]
+            Vp = V[pos]
+            q_postp = np.linalg.solve(Mp, Vp)
+            q_post = np.zeros(len(V))
+            q_post[pos] = q_postp
+            pos = np.where(q_post>=0.)[0]
+        
         # Fill a dataframe with post-merger quantities
         df_post = pd.DataFrame(columns =["Firm"]+post_F[1].mnames)
         i=0
