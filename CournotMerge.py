@@ -229,7 +229,7 @@ class cournotMerge:
         # Display inverse demand functions
         print("Demand Functions\n===================================")
         for i in range(0,self.ms):
-            print("Inverse demand in %s is given by: P = %.2f - %.2f * Q" %(self.markets[i],self.a[i],self.b[i]))
+            print("Inverse demand in %s is given by: P = %.3f - %.3f * Q" %(self.markets[i],self.a[i],self.b[i]))
         print("\n")
     
         # Display current production
@@ -314,7 +314,7 @@ class cournotMerge:
         # Display inverse demand functions
         ps = ""
         for i in range(0,self.ms):
-            ps = ps + "\nInverse demand in %s is given by: P = %.2f - %.2f * Q" %(self.markets[i],self.a[i],self.b[i])
+            ps = ps + "\nInverse demand in %s is given by: P = %.3f - %.3f * Q" %(self.markets[i],self.a[i],self.b[i])
         return ps
         
     def harm(self):
