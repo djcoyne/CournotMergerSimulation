@@ -23,13 +23,13 @@ firms['S'] = cm.firm("Seedlings", [11, 7, 4], markets)
 firms['K'] = cm.firm("Krugels", [38, 23, 10], markets)
 
 # Identify the keys for the two parties that are merging
-merge_index = ['MR','HF']
+merge_keys = ['MR','HF']
 
 # Identify any MC efficiencies for the merging parties (efficiency% reduction in MC)
 efficiency = 5
 
 # Call the merger program
-CM = cm.cournotMerge(F=firms, markets=markets, e=elasticity, p=price, MF=merge_index, E=efficiency)
+CM = cm.cournotMerge(F=firms, markets=markets, e=elasticity, p=price, MF=merge_keys, E=efficiency)
 
 # Describe the merger simulation
 print(CM.describe())
