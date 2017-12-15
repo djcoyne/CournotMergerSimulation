@@ -8,7 +8,7 @@ import CournotMerge as cm
 # Define the markets (use the same order for elasticities, prices, and firm quantities below)
 markets = ["San Diego", "Seattle", "DC"]
 
-# Define the market elasticities
+# Define the market elasticities (order same as markets list)
 elasticity = [0.75, 1.6, 3.1]
 
 # Define the market prices
