@@ -14,16 +14,16 @@ elasticity = [0.75, 1.6, 3.1]
 # Define the market prices
 price = [0.66, 1.20, 1.90]
 
-# Define the Firms as a dictionary starting with index 1 (Name, quantities, markets)
+# Define the Firms as a dictionary (Name, quantities, markets)
 firms={}
-firms[1] = cm.firm("Merchant Rick's", [45, 25, 15], markets)
-firms[2] = cm.firm("Dubertson's", [40, 18, 6], markets)
-firms[3] = cm.firm("Half Foods", [55, 45, 19], markets)
-firms[4] = cm.firm("Seedlings", [11, 7, 4], markets)
-firms[5] = cm.firm("Krugels", [38, 23, 10], markets)
+firms['MR'] = cm.firm("Merchant Rick's", [45, 25, 15], markets)
+firms['D'] = cm.firm("Dubertson's", [40, 18, 6], markets)
+firms['HF'] = cm.firm("Half Foods", [55, 45, 19], markets)
+firms['S'] = cm.firm("Seedlings", [11, 7, 4], markets)
+firms['K'] = cm.firm("Krugels", [38, 23, 10], markets)
 
-# Identify the indices for the two parties that are merging
-merge_index = [1,3]
+# Identify the keys for the two parties that are merging
+merge_index = ['MR','HF']
 
 # Identify any MC efficiencies for the merging parties (efficiency% reduction in MC)
 efficiency = 5
