@@ -20,7 +20,7 @@ firms['MR'] = cm.firm("Merchant Rick's", [45, 25, 15], markets)
 firms['D'] = cm.firm("Dubertson's", [40, 18, 6], markets)
 firms['HF'] = cm.firm("Half Foods", [55, 45, 19], markets)
 firms['S'] = cm.firm("Seedlings", [11, 7, 4], markets)
-firms['K'] = cm.firm("Krugels", [38, 23, 10], markets)
+firms['K'] = cm.firm("Krugel", [38, 23, 10], markets)
 
 # Identify the keys for the two parties that are merging
 merge_keys = ['MR','HF']
