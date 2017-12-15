@@ -37,7 +37,7 @@ class cournotMerge:
         Inputs:
             F       :   dictionary
                         Dictionary containing CournotMerge.firm objects (see below)
-                        (e.g., F = {1: firm1, 2: firm2})
+                        (e.g., F = {1: firm1, 2: firm2, 3: firm3})
             
             markets :   list
                         Strings containing names for relevant geographic markets
@@ -49,10 +49,15 @@ class cournotMerge:
             
             p       :   list
                         Prices by market in order corresponding to markets list
+                        (e.g., p = [25, 26.99, 19.50]) 
             
-            MF
+            MF      :   list (length 2)
+                        Keys for 2 competitors that are merging
+                        (e.g., MF = [1,2])
             
-            E
+            E       :   float
+                        Efficiency gain to merged firm, input as percent reduction in MC
+                        (e.g., E = 15)
         
         '''
         
@@ -243,7 +248,14 @@ class cournotMerge:
         self.harm = harm
     
     def describe(self):
-        # Describe the merger object
+        '''
+        Returns a description of the cournotMerge object.
+        
+        returns :   string
+                    Names the merging parties, other competitors, and markets 
+                    
+        inputs  :   none
+        '''
         ds = "This object simulates a merger between "+self.mp[0]+" and "+self.mp[1]+".\n"
         if self.ns>2:
             ds = ds + "\nAdditional competitors include:\n   "
@@ -255,6 +267,15 @@ class cournotMerge:
         return ds
     
     def summarize(self):
+        '''
+        Prints a summary of information from the merger simulation. Includes demand functions for each market,
+        pre- and post-merger production, pre- and post-merger profits, pre- and post-merger concentration values (HHI),
+        and an estimate of consumer harm (lost consumer surplus).
+        
+        returns :   none
+        
+        inputs  :   none
+        '''
         # Display inverse demand functions
         print("Demand Functions\n===================================")
         for i in range(0,self.ms):
@@ -312,42 +333,84 @@ class cournotMerge:
         print("\n")
         
     def production(self):
-        # Display the post-merger production
+        '''
+        Returns the aggregate post-merger production by market.
+        
+        returns :   string
+                    Describes the aggregate post-merger production in each market 
+                    
+        inputs  :   none
+        '''
         ps = ""
         for i in range(0,self.ms):
             ps = ps+"\nTotal production in %s: %.2f (a change of %.2f percent)" % (self.markets[i],self.Q_post[i],self.Q_change[i])
         return ps
         
     def prices(self):
-        # Display the post-merger prices
+        '''
+        Returns the post-merger prices by market.
+        
+        returns :   string
+                    Describes the post-merger prices facing consumers in each market 
+                    
+        inputs  :   none
+        '''
         ps = ""
         for i in range(0,self.ms):
             ps = ps+"\nPrice in %s: %.2f (a change of %.2f percent)" % (self.markets[i],self.p_post[i],self.p_change[i])
         return ps     
         
     def concentration(self):
-        # Display post-merger HHI values
+        '''
+        Returns the post-merger concentration (HHI) by market.
+        
+        returns :   string
+                    Reports the post-merger HHI and delta in each market 
+                    
+        inputs  :   none
+        '''
         ps = ""
         for i in range(0,self.ms):
             ps = ps +"\nPost-merger HHI for %s is: %.0f (a change of %.0f)" %(self.markets[i],self.hhi_post[i], self.hhi_change[i])
         return ps
         
     def profits(self):
-        # Display post-merger variable profits
+        '''
+        Returns the post-merger profits by firm.
+        
+        returns :   string
+                    Describes the post-merger profits of each competitor 
+                    
+        inputs  :   none
+        '''
         ps = ""
         for i in range(0,self.post_ns):
             ps = ps+"\nVariable profits for %s: %.2f (a change of %.2f percent)" %(self.df_post.iloc[i,0],self.prof_post[i],self.prof_change[i])
         return ps
         
     def demand(self):
-        # Display inverse demand functions
+        '''
+        Returns the demand functions describing each market.
+        
+        returns :   string
+                    Reports the inverse demand function in each market
+                    
+        inputs  :   none
+        '''
         ps = ""
         for i in range(0,self.ms):
             ps = ps + "\nInverse demand in %s is given by: P = %.3f - %.3f * Q" %(self.markets[i],self.a[i],self.b[i])
         return ps
         
     def harm(self):
-        # Report the estimated harm to consumers
+        '''
+        Returns the estimated consumer harm from the merger.
+        
+        returns :   string
+                    Describes the reduction in consumer surplus arising from the merger
+                    
+        inputs  :   none
+        '''
         ps = ""
         for i in range(0,self.ms):
             ps = ps + "\nEstimated harm to consumers in %s: %.3f" % (self.markets[i], self.harm[i])
@@ -356,6 +419,22 @@ class cournotMerge:
 # Define a Cournot firm object class "firm"
 class firm:
     def __init__(self, name="", q=[0], markets=[""]):
+        '''
+        Initializes a CournotMerge.firm object
+        
+        returns :   firm object 
+                    
+        inputs  :   
+            name    :   string
+                        The name of the firm
+                        (e.g., name = "Dave Corp")
+            
+            q       :   list
+                        Production values by market
+                        
+            markets :   list
+                        List of markets the firm competes in ordered same as q list
+        '''
         self.name = name
         self.q = np.array(q)
         self.mnames = markets
