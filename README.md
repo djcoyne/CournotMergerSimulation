@@ -5,7 +5,9 @@ This Python program simulates a merger of 2 firms in an imperfectly competitive 
 assumptions:
 
 a. Cournot competition between user-defined firms
+
 b. Linear demand, potentially in multiple geographic markets
+
 c. quadratic costs
 
 (Note: The program also currently assumes that production is at a single facility and that firms compete over one specific product market. Functionality for jointly-defined geographic and product markets, as well as support for multiple production facilities will be added in a future update.)
