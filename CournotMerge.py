@@ -29,6 +29,35 @@ from scipy.optimize import minimize
 # Define a merger object class
 class cournotMerge:
     def __init__(self, F={}, markets=[], e=[], p=[], MF = [0,1], E=0):
+        '''
+        Initializes a cournotMerge simulation in a market described by the user.
+        
+        Returns: cournotMerge object
+        
+        Inputs:
+            F       :   dictionary
+                        Dictionary containing CournotMerge.firm objects (see below)
+                        (e.g., F = {1: firm1, 2: firm2})
+            
+            markets :   list
+                        Strings containing names for relevant geographic markets
+                        (e.g., markets = ['North America', 'Europe', 'Asia'])
+            
+            e       :   list
+                        Market elasticities with order corresponding to markets list
+                        (e.g., e = [1.2, 3.4, 5])
+            
+            p       :   list
+                        Prices by market in order corresponding to markets list
+            
+            MF
+            
+            E
+        
+        '''
+        
+        
+        
         # Reformat the input data for calculations
         u = MF[0]
         v = MF[1]
