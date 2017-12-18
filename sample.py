@@ -23,7 +23,7 @@ firms[4] = cm.firm("Seedlings", [11, 7, 4], markets)
 firms[5] = cm.firm("Krugel", [38, 23, 10], markets)
 
 # Identify the keys for the two parties that are merging
-merge_keys = ['MR','HF']
+merge_keys = [1,3]
 
 # Identify any MC efficiencies for the merging parties (efficiency% reduction in MC)
 efficiency = 5
