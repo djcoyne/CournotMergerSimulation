@@ -16,7 +16,7 @@ price = [0.66, 1.20, 1.90]
 
 # Define the Firms as a dictionary (Name, quantities, markets)
 firms={}
-firms[1] = cm.firm("Merchant Rick's", [45, 25, 15], markets)
+firms[1] = cm.firm("Merchant Rick's", [45.0, 25, 15], markets)
 firms[2] = cm.firm("Dubertson's", [40, 18, 6], markets)
 firms[3] = cm.firm("Half Foods", [55, 45, 19], markets)
 firms[4] = cm.firm("Seedlings", [11, 7, 4], markets)
