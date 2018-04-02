@@ -75,7 +75,7 @@ class cournotMerge:
 
         i = 0
         for index,f in enumerate(F):
-            df.loc[i]=[F[f].name,*F[f].q]
+            df.loc[i]=[F[f].name,*F[f].q.astype('float')]
             i+=1
         self.df = df
             
